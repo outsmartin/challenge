@@ -1,0 +1,30 @@
+<h1>Request an offer!</h1>
+<%= form_tag(offer_api_path, method: "get") do %>
+    <%= label_tag(:uid, "Player ID:") %>
+  <%= text_field_tag(:uid, "player1") %>
+    <%= label_tag(:pub0, "Campaign ID") %>
+  <%= text_field_tag(:pub0) %>
+    <%= label_tag(:page, "page") %>
+  <%= text_field_tag(:page, "1") %>
+  <%= submit_tag("Get offers!") %>
+<% end %>
+
+<% if @response %>
+  <%= @message %>
+<% end%>
+
+<hr />
+
+<% if @offers %>
+  <% @offers.each do |offer| %>
+    <div class='offer'>
+      <div class='title'><%=offer["title"]%></div>
+      <div class='payout'><%=offer["payout"]%></div>
+      <div class='thumbnail'><%=image_tag(offer["thumbnail"]["lowres"])%></div>
+    </div>
+  <% end%>
+<% else %>
+<div class='no_offers'>
+  No offers
+</div>
+<% end%>
